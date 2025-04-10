@@ -1,8 +1,8 @@
 <?php
 
-namespace Froiden\RestAPI;
+namespace Mramzani\RestAPI;
 
-use Froiden\RestAPI\Exceptions\ApiException;
+use Mramzani\RestAPI\Exceptions\ApiException;
 
 class ApiResponse
 {

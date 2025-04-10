@@ -1,6 +1,6 @@
 <?php
 
-namespace Froiden\RestAPI\Routing;
+namespace Mramzani\RestAPI\Routing;
 
 class ApiUrlGenerator extends \Illuminate\Routing\UrlGenerator
 {

@@ -1,22 +1,22 @@
 <?php
 
-namespace Froiden\RestAPI\Tests;
+namespace Mramzani\RestAPI\Tests;
 
-use Froiden\RestAPI\Facades\ApiRoute;
-use Froiden\RestAPI\Routing\ApiRouter;
-use Froiden\RestAPI\Tests\Controllers\CommentController;
-use Froiden\RestAPI\Tests\Controllers\PostController;
-use Froiden\RestAPI\Tests\Controllers\UserController;
-use Froiden\RestAPI\Tests\Models\DummyComment;
-use Froiden\RestAPI\Tests\Models\DummyPhone;
-use Froiden\RestAPI\Tests\Models\DummyPost;
-use Froiden\RestAPI\Tests\Models\DummyUser;
+use Mramzani\RestAPI\Facades\ApiRoute;
+use Mramzani\RestAPI\Routing\ApiRouter;
+use Mramzani\RestAPI\Tests\Controllers\CommentController;
+use Mramzani\RestAPI\Tests\Controllers\PostController;
+use Mramzani\RestAPI\Tests\Controllers\UserController;
+use Mramzani\RestAPI\Tests\Models\DummyComment;
+use Mramzani\RestAPI\Tests\Models\DummyPhone;
+use Mramzani\RestAPI\Tests\Models\DummyPost;
+use Mramzani\RestAPI\Tests\Models\DummyUser;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class TestCase
- * @package Froiden\RestAPI\Tests
+ * @package Mramzani\RestAPI\Tests
  */
 class  TestCase extends \Illuminate\Foundation\Testing\TestCase
 {
@@ -34,7 +34,7 @@ class  TestCase extends \Illuminate\Foundation\Testing\TestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         \DB::statement("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
 
         $this->createTables();

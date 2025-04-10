@@ -1,15 +1,14 @@
 <?php
 
-namespace Froiden\RestAPI\Handlers;
+namespace Mramzani\RestAPI\Handlers;
 
 use App\Exceptions\Handler;
-use Froiden\RestAPI\ApiResponse;
-use Froiden\RestAPI\Exceptions\ApiException;
-use Froiden\RestAPI\Exceptions\Parse\UnknownFieldException;
-use Froiden\RestAPI\Exceptions\UnauthenticatedException;
-use Froiden\RestAPI\Exceptions\UnauthenticationException;
-use Froiden\RestAPI\Exceptions\UnauthorizedException;
-use Froiden\RestAPI\Exceptions\ValidationException;
+use Mramzani\RestAPI\ApiResponse;
+use Mramzani\RestAPI\Exceptions\ApiException;
+use Mramzani\RestAPI\Exceptions\Parse\UnknownFieldException;
+use Mramzani\RestAPI\Exceptions\UnauthenticationException;
+use Mramzani\RestAPI\Exceptions\UnauthorizedException;
+use Mramzani\RestAPI\Exceptions\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -87,7 +86,7 @@ class ApiExceptionHandler extends Handler
 
             return ApiResponse::exception(new ApiException($message, null, 500, 500, null, $response));
         }
-        
+
         return parent::render($request, $e);
     }
 

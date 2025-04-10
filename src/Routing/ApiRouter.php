@@ -1,10 +1,10 @@
 <?php
 
-namespace Froiden\RestAPI\Routing;
+namespace Mramzani\RestAPI\Routing;
 
 use Closure;
-use Froiden\RestAPI\Exceptions\ApiException;
-use Froiden\RestAPI\Middleware\ApiMiddleware;
+use Mramzani\RestAPI\Exceptions\ApiException;
+use Mramzani\RestAPI\Middleware\ApiMiddleware;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Routing\ResourceRegistrar;
@@ -25,8 +25,8 @@ class ApiRouter extends Router
      */
     public function resource($name, $controller, array $options = [])
     {
-        if ($this->container && $this->container->bound('Froiden\RestAPI\Routing\ApiResourceRegistrar')) {
-            $registrar = $this->container->make('Froiden\RestAPI\Routing\ApiResourceRegistrar');
+        if ($this->container && $this->container->bound('Mramzani\RestAPI\Routing\ApiResourceRegistrar')) {
+            $registrar = $this->container->make('Mramzani\RestAPI\Routing\ApiResourceRegistrar');
         }
         else {
             $registrar = new ResourceRegistrar($this);
@@ -94,7 +94,7 @@ class ApiRouter extends Router
 //             $routes->add($route);
 
             // Options route
-           // $route = $this->createRoute(['OPTIONS'], $uri, ['uses' => '\Froiden\RestAPI\Routing\ApiRouter@returnRoute']);
+           // $route = $this->createRoute(['OPTIONS'], $uri, ['uses' => '\\Mramzani\RestAPI\Routing\ApiRouter@returnRoute']);
 
 //             $route->middleware(ApiMiddleware::class);
 

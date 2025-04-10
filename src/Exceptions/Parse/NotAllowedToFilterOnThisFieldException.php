@@ -1,8 +1,8 @@
 <?php
-namespace Froiden\RestAPI\Exceptions\Parse;
+namespace Mramzani\RestAPI\Exceptions\Parse;
 
-use Froiden\RestAPI\Exceptions\ApiException;
-use Froiden\RestAPI\Exceptions\ErrorCodes;
+use Mramzani\RestAPI\Exceptions\ApiException;
+use Mramzani\RestAPI\Exceptions\ErrorCodes;
 
 class NotAllowedToFilterOnThisFieldException extends ApiException
 {

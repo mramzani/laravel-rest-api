@@ -1,10 +1,10 @@
 <?php
 
-namespace Froiden\RestAPI\Providers;
+namespace Mramzani\RestAPI\Providers;
 
-use Froiden\RestAPI\Handlers\ApiExceptionHandler;
-use Froiden\RestAPI\Routing\ApiResourceRegistrar;
-use Froiden\RestAPI\Routing\ApiRouter;
+use Mramzani\RestAPI\Handlers\ApiExceptionHandler;
+use Mramzani\RestAPI\Routing\ApiResourceRegistrar;
+use Mramzani\RestAPI\Routing\ApiRouter;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\RouteCollection;

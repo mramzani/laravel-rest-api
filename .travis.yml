@@ -12,17 +12,17 @@ cache:
 install:
   # specify the laravel service providers to insert
   - export PACKAGE_PROVIDER="
-    Froiden\\\\RestAPI\\\\Providers\\\\ApiServiceProvider::class"
+    Mramzani\\\\RestAPI\\\\Providers\\\\ApiServiceProvider::class"
   - export FACADES="
-    'ApiRoute' => Froiden\\\\RestAPI\\\\Facades\\\\ApiRoute::class"
+    'ApiRoute' => Mramzani\\\\RestAPI\\\\Facades\\\\ApiRoute::class"
   - export DB_HOST="localhost"
   - export DB_DATABASE="homestead_test"
   - export DB_USERNAME="root"
   - export DB_PASSWORD=""
   #specify the package to test
-  - export PACKAGE_NAME=froiden/laravel-rest-api
+  - export PACKAGE_NAME=mramzani/laravel-rest-api
   #run the setup script
-  - curl -s https://raw.githubusercontent.com/froiden/laravel-rest-api/master/setup.sh | bash
+  - curl -s https://raw.githubusercontent.com/mramzani/laravel-rest-api/master/setup.sh | bash
   - mysql -e 'create database homestead_test;'
 
 services: mysql

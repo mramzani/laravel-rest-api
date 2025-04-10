@@ -1,21 +1,20 @@
 <?php
 
-namespace Froiden\RestAPI;
+namespace Mramzani\RestAPI;
 
-use Froiden\RestAPI\Exceptions\Parse\NotAllowedToFilterOnThisFieldException;
-use Froiden\RestAPI\Exceptions\ResourceNotFoundException;
-use Froiden\RestAPI\Tests\Models\DummyUser;
+use Mramzani\RestAPI\Exceptions\Parse\NotAllowedToFilterOnThisFieldException;
+use Mramzani\RestAPI\Exceptions\RelatedResourceNotFoundException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Froiden\RestAPI\ExtendedRelations\BelongsToMany;
+use Mramzani\RestAPI\Exceptions\ResourceNotFoundException;
+use Mramzani\RestAPI\ExtendedRelations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ApiController extends \Illuminate\Routing\Controller
 {
@@ -140,10 +139,13 @@ class ApiController extends \Illuminate\Routing\Controller
      * Process index page request
      *
      * @return mixed
+     * @throws ResourceNotFoundException
+     * @throws NotAllowedToFilterOnThisFieldException
      */
     public function index()
     {
         $this->validate();
+
 
         $results = $this->parseRequest()
             ->addIncludes()
@@ -163,6 +165,7 @@ class ApiController extends \Illuminate\Routing\Controller
      * Process the show request
      *
      * @return mixed
+     * @throws ResourceNotFoundException
      */
     public function show(...$args)
     {
@@ -170,7 +173,8 @@ class ApiController extends \Illuminate\Routing\Controller
         // if we map route /user/{user}/comments/{comment} to a controller, Laravel will pass `user`
         // as first argument and `comment` as last argument. So, id object that we want to fetch
         // is the last argument.
-        $id = last(func_get_args());
+        //$id = last(func_get_args());
+        $id = $this->getIdFromParams(...$args);
 
         $this->validate();
 
@@ -187,6 +191,10 @@ class ApiController extends \Illuminate\Routing\Controller
         return ApiResponse::make(null, $results, $meta);
     }
 
+    /**
+     * @throws ResourceNotFoundException
+     * @throws RelatedResourceNotFoundException
+     */
     public function store()
     {
         \DB::beginTransaction();
@@ -216,11 +224,17 @@ class ApiController extends \Illuminate\Routing\Controller
         return ApiResponse::make("Resource created successfully", [ "id" => $object->id ], $meta);
     }
 
+    /**
+     * @throws ResourceNotFoundException
+     * @throws RelatedResourceNotFoundException
+     */
     public function update(...$args)
     {
         \DB::beginTransaction();
 
-        $id = last(func_get_args());
+        //$id = last(func_get_args());
+        $id = $this->getIdFromParams(...$args);
+
 
         $this->validate();
 
@@ -258,7 +272,8 @@ class ApiController extends \Illuminate\Routing\Controller
     {
         \DB::beginTransaction();
 
-        $id = last(func_get_args());
+        //$id = last(func_get_args());
+        $id = $this->getIdFromParams(...$args);
 
         $this->validate();
 
@@ -789,7 +804,7 @@ class ApiController extends \Illuminate\Routing\Controller
     {
         return in_array("store", explode(".", request()->route()->getName()));
     }
-    
+
     /**
      * Checks if current request is relation request
      * @return bool
@@ -867,6 +882,15 @@ class ApiController extends \Illuminate\Routing\Controller
 
     protected function setQuery($query) {
         $this->query = $query;
+    }
+
+    protected function getIdFromParams($params)
+    {
+        $xid = last(func_get_args());
+        $convertedId = Hashids::decode($xid);
+        $id = array_key_exists(0,$convertedId) ? $convertedId[0] : null;
+        //$id = $convertedId[0];
+        return $id;
     }
 
     //endregion

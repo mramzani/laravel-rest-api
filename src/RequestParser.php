@@ -1,12 +1,13 @@
 <?php
 
-namespace Froiden\RestAPI;
+namespace Mramzani\RestAPI;
 
-use Froiden\RestAPI\Exceptions\Parse\InvalidLimitException;
-use Froiden\RestAPI\Exceptions\Parse\InvalidFilterDefinitionException;
-use Froiden\RestAPI\Exceptions\Parse\InvalidOrderingDefinitionException;
-use Froiden\RestAPI\Exceptions\Parse\MaxLimitException;
-use Froiden\RestAPI\Exceptions\Parse\NotAllowedToFilterOnThisFieldException;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Mramzani\RestAPI\Exceptions\Parse\InvalidLimitException;
+use Mramzani\RestAPI\Exceptions\Parse\InvalidFilterDefinitionException;
+use Mramzani\RestAPI\Exceptions\Parse\InvalidOrderingDefinitionException;
+use Mramzani\RestAPI\Exceptions\Parse\MaxLimitException;
+use Mramzani\RestAPI\Exceptions\Parse\NotAllowedToFilterOnThisFieldException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -494,6 +495,16 @@ class RequestParser
                             // Commented out for third level hasmany limit
                            // $this->relations[$fieldName]["limit"] = $this->relations[$fieldName]["limit"] * $this->limit;
                         }
+                    }
+
+                    $relation = call_user_func([new $this->model(), $fieldName]);
+
+                    if ($relation instanceof MorphTo) {
+                        $morphType = $relation->getMorphType();
+                        $morphId = $relation->getForeignKeyName();
+                        $this->fields[] = $morphType;
+                        $this->fields[] = $morphId;
+                        $this->relations[$fieldName]["morph"] = true;
                     }
 
                 }

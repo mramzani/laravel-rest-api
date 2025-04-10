@@ -1,6 +1,6 @@
 <?php
 
-use Froiden\RestAPI\Tests\TestCase;
+use Mramzani\RestAPI\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -71,7 +71,7 @@ class DummyUserTest extends TestCase
         $createFactory = \Illuminate\Database\Eloquent\Factory::construct(\Faker\Factory::create(),
             base_path() . '/laravel-rest-api/tests/Factories');
 
-        $userId = $createFactory->of(\Froiden\RestAPI\Tests\Models\DummyUser::class)->create();
+        $userId = $createFactory->of(\Mramzani\RestAPI\Tests\Models\DummyUser::class)->create();
 
         // Use "filters" to modify The result
         $response = $this->call('GET', '/dummyUser',
@@ -121,7 +121,7 @@ class DummyUserTest extends TestCase
 
     public function testUserShowFunction()
     {
-        $user = \Froiden\RestAPI\Tests\Models\DummyUser::all()->random();
+        $user = \Mramzani\RestAPI\Tests\Models\DummyUser::all()->random();
         $response = $this->call('GET', '/dummyUser/'.$user->id);
 
         $this->assertEquals(200, $response->status());
@@ -129,14 +129,14 @@ class DummyUserTest extends TestCase
 
     public function testShowCommentsByUserRelationsEndpoint()
     {
-        $user = \Froiden\RestAPI\Tests\Models\DummyUser::all()->random();
+        $user = \Mramzani\RestAPI\Tests\Models\DummyUser::all()->random();
 
-        $post = \Froiden\RestAPI\Tests\Models\DummyPost::all()->random();
+        $post = \Mramzani\RestAPI\Tests\Models\DummyPost::all()->random();
 
         $createFactory = \Illuminate\Database\Eloquent\Factory::construct(\Faker\Factory::create(),
             base_path() . '/laravel-rest-api/tests/Factories');
 
-        $comment = $createFactory->of(\Froiden\RestAPI\Tests\Models\DummyComment::class)->create([
+        $comment = $createFactory->of(\Mramzani\RestAPI\Tests\Models\DummyComment::class)->create([
             'comment' => "Dummy Comments",
             'user_id' => $user->id,
             'post_id' => $post->id
@@ -153,12 +153,12 @@ class DummyUserTest extends TestCase
     public function testShowPostsByUserRelationsEndpoint()
     {
         //region Insert Dummy Data
-        $user = \Froiden\RestAPI\Tests\Models\DummyUser::all()->random();
+        $user = \Mramzani\RestAPI\Tests\Models\DummyUser::all()->random();
 
         $createFactory = \Illuminate\Database\Eloquent\Factory::construct(\Faker\Factory::create(),
             base_path() . '/laravel-rest-api/tests/Factories');
 
-        $createFactory->of(\Froiden\RestAPI\Tests\Models\DummyPost::class)->create([
+        $createFactory->of(\Mramzani\RestAPI\Tests\Models\DummyPost::class)->create([
             'post' => "dummy POst",
             'user_id' => $user->id,
         ]);
@@ -188,7 +188,7 @@ class DummyUserTest extends TestCase
 
     public function testUserUpdate()
     {
-        $user = \Froiden\RestAPI\Tests\Models\DummyUser::all()->random();
+        $user = \Mramzani\RestAPI\Tests\Models\DummyUser::all()->random();
 
         $response = $this->call('PUT', '/dummyUser/'.$user->id,
             [
@@ -206,7 +206,7 @@ class DummyUserTest extends TestCase
      */
     public function testUserDelete()
     {
-        $user = \Froiden\RestAPI\Tests\Models\DummyUser::all()->random();
+        $user = \Mramzani\RestAPI\Tests\Models\DummyUser::all()->random();
 
         $response = $this->call('DELETE', '/dummyUser/'.$user->id);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Froiden\RestAPI\Exceptions;
+namespace Mramzani\RestAPI\Exceptions;
 
 use Illuminate\Contracts\Support\Jsonable;
 

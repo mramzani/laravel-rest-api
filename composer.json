@@ -1,5 +1,5 @@
 {
-    "name": "froiden/laravel-rest-api",
+    "name": "mramzani/laravel-rest-api",
     "description": "Powerful RestAPI plugin for Laravel framework",
     "type": "library",
     "require": {
@@ -8,18 +8,14 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Froiden\\RestAPI\\": "src",
-            "Froiden\\RestAPI\\Tests\\": "tests"
+            "Mramzani\\RestAPI\\": "src",
+            "Mramzani\\RestAPI\\Tests\\": "tests"
         }
     },
     "authors": [
         {
-            "name": "Shashank Jain",
-            "email": "shashank@froiden.com"
-        },
-        {
-            "name": "Ajay Kumar Choudhary",
-            "email": "ajay@froiden.com"
+            "name": "Mohamad Ramzani",
+            "email": "moramzani1994@gmail.com"
         }
     ]
 }

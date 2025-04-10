@@ -1,8 +1,8 @@
 <?php
 
-namespace Froiden\RestAPI\Tests\Models;
+namespace Mramzani\RestAPI\Tests\Models;
 
-use Froiden\RestAPI\ApiModel;
+use Mramzani\RestAPI\ApiModel;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -35,7 +35,7 @@ class DummyUser extends ApiModel
      */
     public function phone()
     {
-        return $this->hasOne('Froiden\RestAPI\Tests\Models\DummyPhone', 'user_id', 'id');
+        return $this->hasOne('Mramzani\RestAPI\Tests\Models\DummyPhone', 'user_id', 'id');
     }
 
     /**
@@ -43,7 +43,7 @@ class DummyUser extends ApiModel
      */
     public function posts()
     {
-        return $this->hasMany('Froiden\RestAPI\Tests\Models\DummyPost', 'user_id', 'id');
+        return $this->hasMany('Mramzani\RestAPI\Tests\Models\DummyPost', 'user_id', 'id');
     }
 
     /**
@@ -51,6 +51,6 @@ class DummyUser extends ApiModel
      */
     public function comments()
     {
-        return $this->hasMany('Froiden\RestAPI\Tests\Models\DummyComment', 'user_id', 'id');
+        return $this->hasMany('Mramzani\RestAPI\Tests\Models\DummyComment', 'user_id', 'id');
     }
 }

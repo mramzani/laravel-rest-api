@@ -1,8 +1,8 @@
 <?php
 
-namespace Froiden\RestAPI\Tests\Models;
+namespace Mramzani\RestAPI\Tests\Models;
 
-use Froiden\RestAPI\ApiModel;
+use Mramzani\RestAPI\ApiModel;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -34,7 +34,7 @@ class DummyPost extends ApiModel
      */
     public function comments()
     {
-        return $this->hasMany('Froiden\RestAPI\Tests\Models\DummyComment');
+        return $this->hasMany('Mramzani\RestAPI\Tests\Models\DummyComment');
     }
 
 }
